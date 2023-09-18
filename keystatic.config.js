@@ -3,7 +3,11 @@ import { config, fields, collection } from '@keystatic/core';
 
 export default config({
   storage: {
-    kind: 'local',
+    kind: 'github',
+    repo: {
+      owner: 'segi3',
+      name: 'keystatic-app'
+  }  
   },
   collections: {
     posts: collection({
@@ -13,6 +17,10 @@ export default config({
       format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
+        draft: fields.checkbox({
+          label: 'Draft',
+          description: 'Set this post as draft to prevent it from being published'
+        }),
         content: fields.document({
           label: 'Content',
           formatting: true,
